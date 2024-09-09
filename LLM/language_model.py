@@ -46,7 +46,7 @@ class LanguageModelHandler(BaseHandler):
         self.device = device
         self.torch_dtype = getattr(torch, torch_dtype)
 
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
         self.model = AutoModelForCausalLM.from_pretrained(
             model_name, torch_dtype=torch_dtype, trust_remote_code=True
         ).to(device)

@@ -113,8 +113,10 @@ def listen_and_play(
 
     finally:
         stop_event.set()
-        recv_thread.join()
-        send_thread.join()
+        if 'recv_thread' in locals():
+            recv_thread.join()
+        if 'send_thread' in locals():
+            send_thread.join()
         send_socket.close()
         recv_socket.close()
         print("Connection closed.")
